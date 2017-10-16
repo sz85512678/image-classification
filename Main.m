@@ -2,6 +2,7 @@
 
 pctTrainingSet = 0.75;
 randSeed = 1;
+intensityDirection = 2;
 
 %% Loading image data
 
@@ -16,3 +17,8 @@ picLabel = transpose(gnd);
 
 [trainingSet, testSet, trainingLabel, testLabel] =...
     SeparateTrainingTestSets(pixelMat, picLabel, pctTrainingSet, randSeed);
+
+%% Intensity
+
+[newTrainingSet, meanVectorIntensity]...
+    = NeutralisePixelMatrix(trainingSet, intensityDirection);
