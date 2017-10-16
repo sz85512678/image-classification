@@ -2,6 +2,7 @@
 
 pctTrainingSet = 0.75;
 randSeed = 1;
+intensityDirection = 2;
 
 %% Loading image data
 
@@ -28,3 +29,8 @@ for i = 1:size(testSet,2)
 end
 
 error = sum(test_result==testLabel);
+%% Intensity
+
+[newTrainingSet, meanVectorIntensity]...
+    = NeutralisePixelMatrix(trainingSet, intensityDirection);
+
