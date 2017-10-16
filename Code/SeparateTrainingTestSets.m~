@@ -1,0 +1,10 @@
+function [trainingSet, testSet] SeperateTrainingTestSets( wholeDataSet, pctTraingSet, randSeed )
+
+N 
+
+% Sees the random number generator
+rng(randSeed);
+
+x = 
+
+end
