@@ -9,7 +9,7 @@ function [reduced_data] = ReduceData(original_data,m,n,V)
 
 %V, matrix of principle components calculated in previous steps
 
-V = V(m+1:m+n,:);
+V = V(:,m+1:m+n);
 
 reduced_data = V'*original_data;
 

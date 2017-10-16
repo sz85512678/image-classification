@@ -11,12 +11,14 @@ function [V,D] = PCA_analysis(data)
 %Output: columns of V are eigenvectors in decreasing eigenvalues, D,
 %corresponding eigenvalues
 
+%only returns 100 bigges magnitude eigenvalues
+
 x = data; 
-cov_mat = x'*x;
-[V,D] = eigs(cov_mat);
+cov_mat = x*x';
+[V,D] = eigs(cov_mat,100,'largestabs');
 
 %flip, as we want decreasing size
 
-V = fliplr(V);
-D = flipud(D);
+%V = fliplr(V);
+%D = flipud(D);
 end
