@@ -11,24 +11,31 @@ load(fileName);
 pixelMat = transpose(fea);
 picLabel = transpose(gnd);
 
-%% Separate training and test sets
+%% Separating training and test sets
 
 [trainingSet, testSet, trainingLabel, testLabel] =...
     SeparateTrainingTestSets(pixelMat, picLabel, config.pctTrainingSet, config.randSeed);
 
-%% Neutralise (intensity of) data sets
+%% Neutralising (intensity of) data sets
 
-[newTrainingSet, newTestSet] = NeutralisePixelMatrix(trainingSet, testSet, config.intensityDirection);
+[newTrainingSet, newTestSet] =...
+    NeutralisePixelMatrix(trainingSet, testSet, config.intensityDirection);
 
 %% Testing
 
-%r_class = kClassifier(trainingSet, trainingLabel, testSet(:,1),2,10,10);
-tic
+tic;
 [V,D] = PCA_analysis(newTrainingSet);
 test_result = zeros(1,size(newTestSet,2));
 for i = 1:size(newTestSet,2)
     test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),config.numRemovedFea,config.numFeatures,config.numNeighbours,V);
 end
-toc
-[success_rate,type1error_rate,type2error_rate] = Reporter(testLabel,test_result,1)
+elapsedTime = toc;
 
+%% Reporting
+
+[success_rate,type1error_rate,type2error_rate] = PerformanceReporter(testLabel,test_result,1:32);
+disp(' ');
+disp('Performance Report:');
+disp(['The total elapsed time is ', num2str(elapsedTime), ' seconds.']);
+disp(['The success rate is ', num2str(success_rate*100), '%.']);
+disp(' ');
