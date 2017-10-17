@@ -23,11 +23,12 @@ picLabel = transpose(gnd);
 %% Testing
 
 %r_class = kClassifier(trainingSet, trainingLabel, testSet(:,1),2,10,10);
+tic
 [V,D] = PCA_analysis(newTrainingSet);
 test_result = zeros(1,size(newTestSet,2));
 for i = 1:size(newTestSet,2)
     test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),config.numRemovedFea,config.numFeatures,config.numNeighbours,V);
 end
-
-[r,e1,e2] = Reporter(testLabel,test_result,1);
+toc
+[success_rate,type1error_rate,type2error_rate] = Reporter(testLabel,test_result,1)
 
