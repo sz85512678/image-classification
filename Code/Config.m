@@ -17,15 +17,15 @@ config.pctTrainingSet = 0.7;
 config.intensityDirection = 2;
 
 % Number of features to be used for each image in the learning process.
-% This value ranges from 1 to 100 by design of the code.
+% This value ranges from 1 to 1000 by design of the code.
 config.numFeatures = 90;
 
 % Number of the first principle components to be removed.
-% This value ranges from 1 to 100 by design of the code.
+% This value ranges from 1 to 1000 by design of the code.
 % Notes: the sum of the numFeatures and numRemovedFeatures shall not exceed
-% 100!
+% 1000!
 config.numRemovedFea = 2;
 
 % Number of neighbours to be used in the k-nearest-neighbour classifier
 % This value ranges from 1 to the size of the data set
-config.numNeighbours = 10; %
+config.numNeighbours = 10;
