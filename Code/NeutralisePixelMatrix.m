@@ -1,15 +1,16 @@
+% NeutralisePixelMatrix
 
-function [newPixelMatrix, meanVector] = NeutralisePixelMatrix(rawPixelMatrix, direction)
+function [newTrainingMatrix, newTestMatrix] = NeutralisePixelMatrix(rawTrainingMatrix, rawTestMatrix, direction)
 
-numSample = size(rawPixelMatrix, direction);
-meanValue = sum(rawPixelMatrix, direction)/numSample;
+numSample = size(rawTrainingMatrix, direction);
+meanValue = sum(rawTrainingMatrix, direction)/numSample;
 
 if direction == 1
-    newPixelMatrix = rawPixelMatrix - repmat(meanValue, [numSample 1]);
-    meanVector = transpose(meanValue);
+    newTrainingMatrix = rawTrainingMatrix - repmat(meanValue, [numSample 1]);
+    newTestMatrix = rawTestMatrix - repmat(sum(rawTestMatrix,1)./size(rawTestMatrix,1), [size(rawTestMatrix, direction) 1]);
 elseif direction == 2 
-    newPixelMatrix = rawPixelMatrix - repmat(meanValue, [1 numSample]);
-    meanVector = meanValue;
+    newTrainingMatrix = rawTrainingMatrix - repmat(meanValue, [1 numSample]);
+    newTestMatrix = rawTestMatrix - repmat(meanValue, [1 size(rawTestMatrix, direction)]);
 end
-
+    
 end

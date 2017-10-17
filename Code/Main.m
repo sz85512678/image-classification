@@ -1,11 +1,6 @@
 %% Configuration
 
-pctTrainingSet = 0.7;
-randSeed = 1;
-intensityDirection = 1;
-numFeatures = 98;   % 0 - 90
-numRemovedFea = 2;  % 0 - 10
-numNeighbours = 10; % 5 - 30
+Config;
 
 %% Loading image data
 
@@ -19,16 +14,11 @@ picLabel = transpose(gnd);
 %% Separate training and test sets
 
 [trainingSet, testSet, trainingLabel, testLabel] =...
-    SeparateTrainingTestSets(pixelMat, picLabel, pctTrainingSet, randSeed);
+    SeparateTrainingTestSets(pixelMat, picLabel, config.pctTrainingSet, config.randSeed);
 
-%% Neutralise data set
+%% Neutralise (intensity of) data sets
 
-[newTrainingSet, trainingMeanVec] = NeutralisePixelMatrix(trainingSet, intensityDirection);
-if intensityDirection == 1
-    newTestSet = testSet - repmat(sum(testSet,1)./size(testSet,1), [size(testSet, intensityDirection) 1]);
-elseif intensityDirection == 2
-    newTestSet = testSet - repmat(trainingMeanVec, [1 size(testSet, intensityDirection)]);
-end
+[newTrainingSet, newTestSet] = NeutralisePixelMatrix(trainingSet, testSet, config.intensityDirection);
 
 %% Testing
 
@@ -36,7 +26,7 @@ end
 [V,D] = PCA_analysis(newTrainingSet);
 test_result = zeros(1,size(newTestSet,2));
 for i = 1:size(newTestSet,2)
-    test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),numRemovedFea,numFeatures,numNeighbours,V);
+    test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),config.numRemovedFea,config.numFeatures,config.numNeighbours,V);
 end
 
 [r,e1,e2] = Reporter(testLabel,test_result,1);
