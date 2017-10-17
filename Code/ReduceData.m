@@ -1,6 +1,6 @@
 function [reduced_data] = ReduceData(original_data,m,n,V)
 
-%This function takes a column vector 1032*1 as an input, out puts reduced
+%This function takes a column vector 1024*1 as an input, out puts reduced
 %data only using a certain range of features
 
 %m, number of leading principle components to be removed

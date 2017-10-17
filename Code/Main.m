@@ -1,8 +1,11 @@
 %% Configuration
 
-pctTrainingSet = 0.6;
+pctTrainingSet = 0.7;
 randSeed = 1;
 intensityDirection = 1;
+numFeatures = 98;   % 0 - 90
+numRemovedFea = 2;  % 0 - 10
+numNeighbours = 10; % 5 - 30
 
 %% Loading image data
 
@@ -33,8 +36,8 @@ end
 [V,D] = PCA_analysis(newTrainingSet);
 test_result = zeros(1,size(newTestSet,2));
 for i = 1:size(newTestSet,2)
-    test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),2,10,10,V);
+    test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),numRemovedFea,numFeatures,numNeighbours,V);
 end
 
-error = sum(test_result==testLabel)/size(newTestSet,2);
+successRate = sum(test_result==testLabel)/size(newTestSet,2);
 

@@ -7,11 +7,13 @@ function r_class = kClassifier(training_data, training_label,testing_data,m,n,k,
 %first of all, reduce data, for both training and testing
 
 
-reduced_data = zeros(n,size(training_data,2));
+%reduced_data = zeros(n,size(training_data,2));
 
-for j = 1:size(training_data,2)
-    reduced_data(:,j) = ReduceData(training_data(:,j),m,n,V);
-end
+%for j = 1:size(training_data,2)
+%    reduced_data(:,j) = ReduceData(training_data(:,j),m,n,V);
+%end
+
+reduced_data = ReduceData(training_data,m,n,V);
 
 testing_data = ReduceData(testing_data,m,n,V);
 

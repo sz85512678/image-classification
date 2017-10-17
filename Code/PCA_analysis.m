@@ -11,7 +11,7 @@ function [V,D] = PCA_analysis(data)
 %Output: columns of V are eigenvectors in decreasing eigenvalues, D,
 %corresponding eigenvalues
 
-%only returns 100 bigges magnitude eigenvalues
+%only returns 100 biggest magnitude eigenvalues
 
 x = data; 
 cov_mat = x*x';
