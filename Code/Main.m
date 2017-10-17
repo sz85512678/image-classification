@@ -39,5 +39,5 @@ for i = 1:size(newTestSet,2)
     test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),numRemovedFea,numFeatures,numNeighbours,V);
 end
 
-successRate = sum(test_result==testLabel)/size(newTestSet,2);
+[r,e1,e2] = Reporter(testLabel,test_result,1);
 
