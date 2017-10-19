@@ -15,7 +15,7 @@ function [V,D] = PCA_analysis(data)
 
 x = data; 
 cov_mat = x*x';
-[V,D] = eigs(cov_mat,400,'largestabs');
+[V,D] = eigs(cov_mat,1000,'largestabs');
 
 %flip, as we want decreasing size
 
