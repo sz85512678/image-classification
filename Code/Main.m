@@ -8,6 +8,8 @@ Config;
 fileName = 'Data/YaleB_32x32.mat';
 load(fileName);
 % Data pre-possessing
+fea = X;
+gnd = y;
 pixelMat = transpose(fea);
 picLabel = transpose(gnd);
 
@@ -33,7 +35,7 @@ elapsedTime = toc;
 
 %% Reporting
 
-[success_rate,type1error_rate,type2error_rate] = PerformanceReporter(testLabel,test_result,1:32);
+[success_rate,type1error_rate,type2error_rate] = PerformanceReporter(testLabel,test_result,1:10);
 disp(' ');
 disp('Performance Report:');
 disp(['The total elapsed time is ', num2str(elapsedTime), ' seconds.']);
