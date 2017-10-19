@@ -1,6 +1,6 @@
 1. HOW TO LAUNCH THE PROJECT?
 
-The package includes 2 folders: Data and Code. To launch the project, run the script "Main.m" in the "Code" folder.
+The package includes 2 folders: Data and Code. To launch the project, run the script "Main.m" in the "Code" folder, or type "Main" in the command line. Make sure both folders and their subfolders (if any) to be included in the Matlab path.
 
 2. HOW TO CHANGE CONFIGURATIONS?
 

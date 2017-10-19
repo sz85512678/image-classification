@@ -1,4 +1,4 @@
-function [rate,varargout] = PerformanceReporter(testLabel, testResult, varargin)
+function [rate,varargout] = PerformanceReporter(algoName, testLabel, testResult, varargin)
 
 %Performance measurement by outputing a lists of statistics
 
@@ -46,22 +46,19 @@ if length(varargin)>0
     varargout{1} = type1err_vec;
     varargout{2} = type2err_vec;
     
-    
-    figure('Name','Type I Error for Face Recogonition')
+    % Plot
+    figure('Name',[algoName ' - Type I Error for Face Recogonition'])
     hold on
     bar(type1err_vec);
     plot(group_numbers, ones(1,length(group_numbers))*1-rate, 'r');
     legend('Type I Error for Faces', 'Overall Error');
     
-    figure('Name','Type II Error for Face Recogonition')
+    figure('Name',[algoName ' - Type II Error for Face Recogonition'])
     hold on
     bar(type2err_vec);
     plot(group_numbers, ones(1,length(group_numbers))*1-rate, 'r');
     legend('Type II Error for Faces', 'Overall Error');
     
 end
-
-
-
 
 end

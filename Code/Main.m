@@ -11,6 +11,8 @@ load(fileName);
 pixelMat = transpose(fea);
 picLabel = transpose(gnd);
 
+uniqueLabel = unique(picLabel);
+
 %% Separating training and test sets
 
 [trainingSet, testSet, trainingLabel, testLabel] =...
@@ -21,21 +23,40 @@ picLabel = transpose(gnd);
 [newTrainingSet, newTestSet] =...
     NeutralisePixelMatrix(trainingSet, testSet, config.intensityDirection);
 
-%% Testing
+%% Learning - k-th nearest neighbours search
 
 tic;
-[V,D] = PCA_analysis(newTrainingSet);
-test_result = zeros(1,size(newTestSet,2));
+
+% Abstract the principal components from the original feature vector
+[pcFeatures,~] = PCA_analysis(newTrainingSet);
+
+% Apply k-nearest-neighbour algorithm
+testResult_Knn = zeros(1,size(newTestSet,2));
 for i = 1:size(newTestSet,2)
-    test_result(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),config.numRemovedFea,config.numFeatures,config.numNeighbours,V);
+    testResult_Knn(i) = kClassifier(newTrainingSet, trainingLabel, newTestSet(:,i),config.numRemovedFea,config.numFeatures,config.numNeighbours,pcFeatures);
 end
-elapsedTime = toc;
+elapsedTimeKNN = toc;
 
-%% Reporting
-
-[success_rate,type1error_rate,type2error_rate] = PerformanceReporter(testLabel,test_result,1:32);
+% Reporting
+[success_rate,type1error_rate,type2error_rate] = PerformanceReporter('KNN', testLabel,testResult_Knn,uniqueLabel);
 disp(' ');
-disp('Performance Report:');
-disp(['The total elapsed time is ', num2str(elapsedTime), ' seconds.']);
+disp('KNN Performance Report:');
+disp(['The total elapsed time is ', num2str(elapsedTimeKNN), ' seconds.']);
+disp(['The success rate is ', num2str(success_rate*100), '%.']);
+disp(' ');
+
+%% Learning - Linear discriminantal classifier
+
+tic;
+
+testResult_Lda = LdaClassifier(trainingSet, trainingLabel, testSet);
+
+elapsedTimeLDA = toc;
+
+% Reporting
+[success_rate,type1error_rate,type2error_rate] = PerformanceReporter('LDA', testLabel,testResult_Lda,uniqueLabel);
+disp(' ');
+disp('LDA Performance Report:');
+disp(['The total elapsed time is ', num2str(elapsedTimeLDA), ' seconds.']);
 disp(['The success rate is ', num2str(success_rate*100), '%.']);
 disp(' ');
