@@ -1,5 +1,10 @@
 % CONFIG defines the struct config that configures the learning problem
 
+% Indices of the images that user would like to show
+% The element of this vector should be integer from 1 to 2414
+% If the user does not wish to see any image, this value can be set as []
+config.displayImage = [1:25];
+
 % Seed of the random value generator to shuffle the original data set as a
 % preparation for separating training and test data sets.
 config.randSeed = 1;

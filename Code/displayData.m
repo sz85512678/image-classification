@@ -4,6 +4,10 @@ function [h, display_array] = displayData(X, example_width)
 %   stored in X in a nice grid. It returns the figure handle h and the 
 %   displayed array if requested.
 
+if isempty(X)
+    return;
+end
+
 % Set example_width automatically if not passed in
 if ~exist('example_width', 'var') || isempty(example_width) 
 	example_width = round(sqrt(size(X, 2)));

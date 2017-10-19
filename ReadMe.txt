@@ -17,3 +17,5 @@ The outputs of "Main.m" is the performance matrices, which include:
 - Type I error for each face: the incorrect rejection of a matched face
 - Type II error for each face: the failure to reject a unmatched face
 - Elapsed time of running the project.
+
+Another possible output is the image of specified pixel number vector. The user can specify which picture to show in the "Config.m" file.

@@ -8,12 +8,13 @@ Config;
 fileName = 'Data/YaleB_32x32.mat';
 load(fileName);
 % Data pre-possessing
-fea = X;
-gnd = y;
 pixelMat = transpose(fea);
 picLabel = transpose(gnd);
 
 uniqueLabel = unique(picLabel);
+
+% Display data
+displayData(fea(config.displayImage,:));
 
 %% Separating training and test sets
 
