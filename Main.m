@@ -10,7 +10,6 @@ load(fileName);
 % Data pre-possessing
 pixelMat = transpose(fea);
 picLabel = transpose(gnd);
-
 uniqueLabel = unique(picLabel);
 
 % Display data
@@ -29,10 +28,8 @@ displayData(fea(config.displayImage,:));
 %% Learning - k-th nearest neighbours search
 
 tic;
-
 % Abstract the principal components from the original feature vector
 [pcFeatures,~] = PCA_analysis(newTrainingSet);
-
 % Apply k-nearest-neighbour algorithm
 testResult_Knn = zeros(1,size(newTestSet,2));
 for i = 1:size(newTestSet,2)
@@ -51,9 +48,7 @@ disp(' ');
 %% Learning - Linear discriminantal classifier
 
 tic;
-
 testResult_Lda = LdaClassifier(trainingSet, trainingLabel, testSet);
-
 elapsedTimeLDA = toc;
 
 % Reporting

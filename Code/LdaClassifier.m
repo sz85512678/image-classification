@@ -1,3 +1,5 @@
+% Linear Discriminant Classifier
+
 function [predictLabel] = LdaClassifier(trainingSet, trainingLabel, testSet)
 
 % Creat the % Create a default (linear) discriminant analysis classifier.

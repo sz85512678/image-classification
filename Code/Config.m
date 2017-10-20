@@ -22,13 +22,13 @@ config.pctTrainingSet = 0.8;
 config.intensityDirection = 1;
 
 % Number of features to be used for each image in the learning process.
-% This value ranges from 1 to 1000 by design of the code.
+% This value ranges from 1 to the size of the total features.
 config.numFeatures = 100;
 
 % Number of the first principle components to be removed.
-% This value ranges from 1 to 1000 by design of the code.
+% This value ranges from 1 to the size of the total features.
 % Notes: the sum of the numFeatures and numRemovedFeatures shall not exceed
-% 1000!
+% the size of the total features.
 config.numRemovedFea = 15;
 
 % Number of neighbours to be used in the k-nearest-neighbour classifier
